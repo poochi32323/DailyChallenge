@@ -19,7 +19,7 @@ public class UserEntity {
 
     private String password;
 
-    private int mobile;
+    private String mobile;
 
     @Column(unique = true)
     private String email;
