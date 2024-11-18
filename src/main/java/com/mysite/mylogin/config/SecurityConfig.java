@@ -45,7 +45,6 @@ public class SecurityConfig {
                         .sessionFixation().changeSessionId());
 
 
-}
 
         return http.build();
     }
