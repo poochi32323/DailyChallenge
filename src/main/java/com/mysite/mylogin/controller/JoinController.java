@@ -1,36 +1,26 @@
 package com.mysite.mylogin.controller;
 
-
-
-import com.mysite.mylogin.dto.JoinDTO;
+import com.mysite.mylogin.dto.JoinRequest;
+import com.mysite.mylogin.dto.JoinResponse;
 import com.mysite.mylogin.service.JoinService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import java.util.ArrayList;
+import java.util.List;
+
+@RestController
+@RequiredArgsConstructor
 public class JoinController {
 
-    @Autowired
-    private JoinService joinService;
+    private final JoinService joinService;
 
-
-    @GetMapping("/join")
-    public String joinP() {
-
-        return "join";
-    }
-
-
-    @PostMapping("/joinProc")
-    public String joinProcess(JoinDTO joinDTO) {
-
-        System.out.println(joinDTO.getUsername());
-
-        joinService.joinProcess(joinDTO);
-
-
-        return "redirect:/login";
+    @PostMapping("/join")
+    public ResponseEntity<JoinResponse> joinProcess(@RequestBody JoinRequest request) {
+        JoinResponse response = joinService.joinProcess(request);
+        return ResponseEntity.ok().body(response);
     }
 }

@@ -2,38 +2,38 @@ package com.mysite.mylogin.service;
 
 
 
-import com.mysite.mylogin.dto.JoinDTO;
+import com.mysite.mylogin.dto.JoinRequest;
+import com.mysite.mylogin.dto.JoinResponse;
 import com.mysite.mylogin.entity.UserEntity;
 import com.mysite.mylogin.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
+@RequiredArgsConstructor
 public class JoinService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    public JoinResponse joinProcess(JoinRequest request) {
+        boolean isUser = userRepository.existsByUsername(request.getUsername());
 
-
-    public void joinProcess(JoinDTO joinDTO) {
-
-        boolean isUser = userRepository.existsByUsername(joinDTO.getUsername());
         if (isUser) {
-            return;
+            return new JoinResponse("이미 가입된 회원입니다.");
         }
-        //db에 이미 동일한 username을 가진 회원이 존재하는지?
+
         UserEntity data = new UserEntity();
-
-        data.setUsername(joinDTO.getUsername());
-        data.setEmail(bCryptPasswordEncoder.encode(joinDTO.getEmail()));
-        data.setPassword(bCryptPasswordEncoder.encode(joinDTO.getPassword()));
-        data.setRole("ROLE_USER");
-
-
+        data.setId(UUID.randomUUID().toString());
+        data.setUsername(request.getUsername());
+        data.setMobile(request.getMobile());
+        data.setEmail(bCryptPasswordEncoder.encode(request.getEmail()));
+        data.setPassword(bCryptPasswordEncoder.encode(request.getPassword()));
         userRepository.save(data);
+
+        return new JoinResponse("회원 가입 되었습니다.");
     }
 }

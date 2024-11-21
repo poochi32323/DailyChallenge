@@ -24,15 +24,6 @@ public class CustomUserDetails implements UserDetails {
 
         Collection<GrantedAuthority> collection = new ArrayList<>();
 
-        collection.add(new GrantedAuthority() {
-
-            @Override
-            public String getAuthority() {
-
-                return userEntity.getRole();
-            }
-        });
-
         return collection;
     }
 
@@ -46,28 +37,24 @@ public class CustomUserDetails implements UserDetails {
         return userEntity.getUsername();
     }
 
-//    @Override
-//    public int getMobile(){
-//        return userEntity.getMobile();
-//    }
-
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return true; // 계정이 만료되지 않았는지 확인
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return true; // 계정이 잠겨있지 않았는지 확인
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return true; // 자격 증명이 만료되지 않았는지 확인
     }
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return true; // 계정이 활성화되어 있는지 확인
     }
+
 }
