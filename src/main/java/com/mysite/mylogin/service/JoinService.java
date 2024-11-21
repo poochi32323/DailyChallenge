@@ -20,15 +20,14 @@ public class JoinService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public JoinResponse joinProcess(JoinRequest request) {
-        boolean isUser = userRepository.existsByUsername(request.getUsername());
+        boolean isUser = userRepository.existsById(request.getUserid());
 
         if (isUser) {
             return new JoinResponse("이미 가입된 회원입니다.");
         }
 
         UserEntity data = new UserEntity();
-        data.setId(UUID.randomUUID().toString());
-        data.setUsername(request.getUsername());
+        data.setUserid(request.getUserid());
         data.setMobile(request.getMobile());
         data.setEmail(bCryptPasswordEncoder.encode(request.getEmail()));
         data.setPassword(bCryptPasswordEncoder.encode(request.getPassword()));

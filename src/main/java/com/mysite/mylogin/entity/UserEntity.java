@@ -10,9 +10,8 @@ import lombok.*;
 public class UserEntity {
 
     @Id
-    private String id;
+    private String userid;
 
-    private String username;
     private String password;
     private String mobile;
     private String email;
