@@ -1,5 +1,6 @@
 package com.mysite.mylogin.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.persistence.*;
@@ -16,6 +17,7 @@ import java.time.LocalTime;
 public class CalendarEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "calendar_id")
     private Long calendarId;
 
     @Column(nullable = false)
@@ -27,6 +29,6 @@ public class CalendarEntity {
     @Column(length = 255)
     private String comment;
 
-    @Column(nullable = false, length = 20)
-    private String userid;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private UserEntity userid;
 }

@@ -1,6 +1,7 @@
 package com.mysite.mylogin.service;
 
 import com.mysite.mylogin.entity.CalendarEntity;
+import com.mysite.mylogin.entity.UserEntity;
 import com.mysite.mylogin.repository.CalendarRepository;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +24,8 @@ public class CalendarService {
         return calendarRepository.findById(id).orElse(null);
     }
 
-    public List<CalendarEntity> getEventsByUserId(String userid){
-        return calendarRepository.findByUserId(userid);
+    public List<CalendarEntity> getEventsByUserId(UserEntity userid){
+        return calendarRepository.findByUserid(userid);
     }
 
     public CalendarEntity saveEvent(CalendarEntity calendar){
