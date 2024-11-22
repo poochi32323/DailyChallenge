@@ -43,7 +43,14 @@ public class CalendarController {
         CalendarEntity existingEvent = calendarService.getEventByID(id);
         if (existingEvent != null) {
             calendarEntity.setCalendarId(id);
-
+            return ResponseEntity.ok(calendarService.saveEvent(calendarEntity));
         }
+        return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteEvent(@PathVariable Long id) {
+        calendarService.deleteEvent(id);
+        return ResponseEntity.noContent().build();
     }
 }
