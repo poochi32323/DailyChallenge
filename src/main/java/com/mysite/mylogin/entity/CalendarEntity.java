@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.persistence.*;
 import lombok.*;
+import org.apache.catalina.User;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -27,6 +28,7 @@ public class CalendarEntity {
     @Column(length = 255)
     private String comment;
 
-    @Column(nullable = false, length = 20)
-    private String userid;
+    @ManyToOne(fetch = FetchType.LAZY)
+//    @Column(nullable = false, length = 20)
+    private UserEntity userid;
 }

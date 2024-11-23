@@ -1,6 +1,7 @@
 package com.mysite.mylogin.controller;
 
 import com.mysite.mylogin.entity.CalendarEntity;
+import com.mysite.mylogin.entity.UserEntity;
 import com.mysite.mylogin.service.CalendarService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,9 +29,9 @@ public class CalendarController {
         return event != null ? ResponseEntity.ok(event) : ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/user/{userID}")
-    public ResponseEntity<List<CalendarEntity>> getEventsByUserID(@PathVariable String userID) {
-        return ResponseEntity.ok(calendarService.getEventsByUserId(userID));
+    @GetMapping("/user/{userid}")
+    public ResponseEntity<List<CalendarEntity>> getEventsByUserid(@PathVariable UserEntity userid) {
+        return ResponseEntity.ok(calendarService.getEventsByUserId(userid));
     }
 
     @PostMapping

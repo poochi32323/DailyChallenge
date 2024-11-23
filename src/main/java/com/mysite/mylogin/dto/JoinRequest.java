@@ -14,23 +14,28 @@ public class JoinRequest {
 
     @NotBlank
     @Size(min = 6, max = 20)
-    @Column(unique = true , nullable = false)
+
     private String userid;
 
     @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+=|<>?{}\\[\\]~-]).{8,}$",
             message = "비밀번호는 최소 하나의 영문자와 하나의 특수문자를 포함한 8자리 이상으로 해야 합니다.")
     @NotBlank
-    @Column(nullable = false)
     @Size(min = 6, max = 20)
     private String password;
 
+    @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+=|<>?{}\\[\\]~-]).{8,}$",
+            message = "비밀번호가 일치하지 않습니다. 다시 입력해주세요")
+    @NotBlank
+    @Size(min = 6, max = 20)
+    private String password1;
+
     @Email(message = "올바른 이메일 주소를 입력해주세요")
-    @Column(unique = true)
+
     @NotBlank
     private String email;
 
 
-    @Column(nullable = false)
+
     @NotBlank
     private String mobile;
 }

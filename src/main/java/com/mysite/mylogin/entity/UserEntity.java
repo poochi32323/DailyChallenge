@@ -10,9 +10,15 @@ import lombok.*;
 public class UserEntity {
 
     @Id
+    @Column(unique = true , nullable = false)
     private String userid;
 
+    @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
     private String mobile;
+
+    @Column(unique = true)
     private String email;
 }

@@ -13,16 +13,24 @@ import java.time.LocalDateTime;
 public class TodoListEntity {
     @Id
     @Column(name = "todo_list_id")
-    private int todoListId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long todoListId;
 
+    @Column(nullable = false)
     private String Title;
+
     private LocalDateTime Due_date;
     private String notes;
+
+    @Column(nullable = false)
     private String Repeat_type;
+
+    @Column(nullable = false)
     private String Favorite;
+
+    @Column(nullable = false)
     private String alarm;
-//
-//    @ManyToOne
-//    @JoinColumn
-//    private UserEntity user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private UserEntity userid;
 }

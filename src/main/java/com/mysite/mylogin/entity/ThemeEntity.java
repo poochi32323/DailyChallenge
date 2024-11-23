@@ -1,8 +1,7 @@
 package com.mysite.mylogin.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -12,7 +11,13 @@ import lombok.*;
 
 public class ThemeEntity {
     @Id
-    private int theme_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
+    private Long theme_id;
+
+    @Column(nullable = false)
     private int theme_price;
+
+    @Column(nullable = false)
     private String theme_image;
 }
